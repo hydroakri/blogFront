@@ -9,9 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ViewAllComponent } from './pages/view-all/view-all.component';
 
 @NgModule({
-  declarations: [AppComponent, CreatePostComponent],
+  declarations: [AppComponent, CreatePostComponent, ViewAllComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
