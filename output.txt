@@ -1,0 +1,552 @@
+
+src/main.ts:
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+
+src/index.html:
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Frontend</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+
+src/styles.scss:
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+src/app/app-routing.module.ts:
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { CreatePostComponent } from './pages/create-post/create-post.component';
+import { ViewAllComponent } from './pages/view-all/view-all.component';
+
+const routes: Routes = [
+  { path: 'create-post', component: CreatePostComponent },
+  { path: 'view-all', component: ViewAllComponent },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
+
+src/app/app.module.ts:
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AngularMaterialModule } from './AngularMaterialModule';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CreatePostComponent } from './pages/create-post/create-post.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ViewAllComponent } from './pages/view-all/view-all.component';
+
+@NgModule({
+  declarations: [AppComponent, CreatePostComponent, ViewAllComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AngularMaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+
+src/app/app.component.scss:
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+src/app/app.component.html:
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+  <span class="example-spacer"></span>
+
+  <button mat-raised-button color="primary" routerLink="/create-post">
+    åå»ºæ°çå¸å­
+  </button>
+  <button mat-raised-button color="primary" routerLink="/view-all">
+    æ¥çå¸å­
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+  >
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+
+src/app/app.component.spec.ts:
+import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+
+describe('AppComponent', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule
+      ],
+      declarations: [
+        AppComponent
+      ],
+    }).compileComponents();
+  });
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it(`should have as title 'frontend'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('frontend');
+  });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, frontend');
+  });
+});
+
+src/app/app.component.ts:
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent {
+  title = 'frontend';
+}
+
+src/app/AngularMaterialModule.ts:
+import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatGridListModule } from '@angular/material/grid-list';
+
+@NgModule({
+  exports: [
+    MatChipsModule, // //
+    MatButtonModule, //
+    MatCardModule, //
+    MatFormFieldModule, //
+    MatInputModule, //
+    MatToolbarModule, //
+    MatSelectModule, //
+    MatIconModule, //
+    MatProgressSpinnerModule, //
+    MatSnackBarModule, //
+    MatPaginatorModule, //
+    MatChipsModule, // //
+    MatMenuModule, //
+    MatRadioModule, // //
+    MatGridListModule, //
+    MatDividerModule, //
+    MatDatepickerModule, //
+    MatNativeDateModule, //
+    MatRadioModule, // //
+    MatDialogModule, //
+    MatTableModule, //
+  ],
+})
+export class AngularMaterialModule {}
+
+src/app/pages/create-post/create-post.component.scss:
+.center-card {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 10px;
+  padding: 30px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+src/app/pages/create-post/create-post.component.html:
+<mat-card class="center-card">
+  <mat-card-content>
+    <div>
+      <form [formGroup]="postForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Img</mat-label>
+          <input matInput formControlName="img" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Content</mat-label>
+          <textarea matInput rows="5" formControlName="content"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Posted By</mat-label>
+          <input matInput formControlName="postedBy" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Tags</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Enter Tags">
+            <mat-chip-row
+              *ngFor="let tag of tags; let i = index"
+              (removed)="remove(tag)"
+            >
+              {{ tag }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+
+            <input
+              placeholder="New Tag"
+              [matChipInputFor]="chipGrid"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-grid>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          style="float: right"
+          [disabled]="!postForm.valid"
+          (click)="createPost()"
+        >
+          åå»ºæ°çå¸å­
+        </button>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+src/app/pages/create-post/create-post.component.spec.ts:
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { CreatePostComponent } from './create-post.component';
+
+describe('CreatePostComponent', () => {
+  let component: CreatePostComponent;
+  let fixture: ComponentFixture<CreatePostComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [CreatePostComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(CreatePostComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+src/app/pages/create-post/create-post.component.ts:
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { PostService } from '../../service/post.service';
+
+@Component({
+  selector: 'app-create-post',
+  templateUrl: './create-post.component.html',
+  styleUrls: ['./create-post.component.scss'],
+})
+export class CreatePostComponent {
+  postForm!: FormGroup;
+  tags: string[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private postService: PostService,
+  ) {}
+
+  ngOnInit() {
+    this.postForm = this.fb.group({
+      name: [null, Validators.required],
+      content: [null, [Validators.required, Validators.maxLength(5000)]],
+      img: [null, Validators.required],
+      postedBy: [null, Validators.required],
+    });
+  }
+
+  add(event: any) {
+    const value = (event.value || '').trim();
+    if (value) {
+      this.tags.push(value);
+    }
+
+    event.chipInput!.clear();
+  }
+
+  remove(tag: any) {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
+  }
+
+  createPost() {
+    const data = this.postForm.value;
+    data.tags = this.tags;
+    this.postService.createNewPost(data).subscribe(
+      (res) => {
+        this.snackBar.open('Post Created Successfully !', 'Ok');
+        this.router.navigateByUrl('/');
+      },
+      (error) => {
+        this.snackBar.open('Something went wrong!', 'Ok');
+      },
+    );
+  }
+}
+
+src/app/pages/view-all/view-all.component.scss:
+.card-container {
+  margin: 16px;
+  max-width: 60%;
+  padding-bottom: 30px;
+}
+mat-card {
+  padding: 10px;
+}
+
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}
+
+mat-card-footer {
+  margin-left: 20px;
+}
+
+.post-img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  margin-top: 15px;
+}
+
+src/app/pages/view-all/view-all.component.html:
+<div class="card-container" *ngFor="let item of allPosts">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ item.name }}</mat-card-title>
+      <mat-card-subtitle
+        >Posted by: {{ item.postedBy }} | Posted on:
+        {{ item.date | date: "medium" }}</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-grid-list cols="5">
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <img
+          mat-card-image
+          [src]="item.img"
+          class="post-img"
+          alt="Card Image"
+        />
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="3" [rowspan]="1"> </mat-grid-tile>
+      <mat-card-content>
+        {{
+          item.content.length > 600
+            ? item.content.substr(0, 600) + "..."
+            : item.content
+        }}
+      </mat-card-content>
+    </mat-grid-list>
+    <hr />
+    <mat-card-actions>
+      <button mat-raised-button color="primary">
+        {{ item.likeCount }} <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-raised-button color="primary" style="margin-left: 5px">
+        {{ item.viewCount }} <mat-icon>remove_red_eye</mat-icon>
+      </button>
+      <button mat-raised-button color="primary" style="margin-left: 5px">
+        View Post
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+src/app/pages/view-all/view-all.component.spec.ts:
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ViewAllComponent } from './view-all.component';
+
+describe('ViewAllComponent', () => {
+  let component: ViewAllComponent;
+  let fixture: ComponentFixture<ViewAllComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ViewAllComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(ViewAllComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+src/app/pages/view-all/view-all.component.ts:
+import { Component } from '@angular/core';
+import { PostService } from '../../service/post.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+@Component({
+  selector: 'app-view-all',
+  templateUrl: './view-all.component.html',
+  styleUrl: './view-all.component.scss',
+})
+export class ViewAllComponent {
+  allPosts: any;
+
+  constructor(
+    private postService: PostService,
+    private snackBar: MatSnackBar,
+  ) {}
+
+  ngOnInit() {
+    this.getAllPosts();
+  }
+
+  getAllPosts() {
+    this.postService.getAllPosts().subscribe(
+      (res) => {
+        console.log(res);
+        this.allPosts = res;
+      },
+      (error) => {
+        this.snackBar.open('Something went wrong', 'Ok');
+      },
+    );
+  }
+}
+
+src/app/service/post.service.spec.ts:
+import { TestBed } from '@angular/core/testing';
+
+import { PostService } from './post.service';
+
+describe('PostService', () => {
+  let service: PostService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(PostService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
+
+src/app/service/post.service.ts:
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+const BASIC_URL = 'http://localhost:8080/';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class PostService {
+  constructor(private http: HttpClient) {}
+
+  createNewPost(data: any): Observable<any> {
+    return this.http.post(BASIC_URL + `api/posts`, data);
+  }
+
+  getAllPosts(): Observable<any> {
+    return this.http.get(BASIC_URL + `api/posts`);
+  }
+}
+
+src/assets/.gitkeep:

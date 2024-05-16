@@ -10,9 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewAllComponent } from './pages/view-all/view-all.component';
+import { ViewPostComponent } from './pages/view-post/view-post.component';
 
 @NgModule({
-  declarations: [AppComponent, CreatePostComponent, ViewAllComponent],
+  declarations: [AppComponent, CreatePostComponent, ViewAllComponent, ViewPostComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
