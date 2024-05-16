@@ -22,4 +22,8 @@ export class CommentService {
       params,
     });
   }
+
+  getAllCommentsByPost(postId: number): Observable<any> {
+    return this.http.get(BASIC_URL + `api/comments/${postId}`);
+  }
 }

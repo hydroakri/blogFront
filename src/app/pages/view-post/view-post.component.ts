@@ -13,6 +13,7 @@ import { CommentService } from '../../service/comment.service';
 export class ViewPostComponent {
   postId = this.activatedRoute.snapshot.params['id'];
   postData: any;
+  comments: any;
 
   commentForm!: FormGroup;
 
@@ -41,6 +42,18 @@ export class ViewPostComponent {
     this.commentService.createComment(this.postId, postedBy, content).subscribe(
       (res) => {
         this.matSnackBar.open('Comment Published successfully', 'Ok');
+        this.getCommentsByPost();
+      },
+      (error) => {
+        this.matSnackBar.open('something went wrong', 'Ok');
+      },
+    );
+  }
+
+  getCommentsByPost() {
+    this.commentService.getAllCommentsByPost(this.postId).subscribe(
+      (res) => {
+        this.comments = res;
       },
       (error) => {
         this.matSnackBar.open('something went wrong', 'Ok');
@@ -53,6 +66,7 @@ export class ViewPostComponent {
       (res) => {
         this.postData = res;
         console.log(res);
+        this.getCommentsByPost();
       },
       (error) => {
         this.matSnackBar.open('something went wrong', 'Ok');
