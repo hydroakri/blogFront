@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>博客首页</h1>
+
+  <div *ngFor="let post of posts">
+    <div class="post-preview">
+      <h2>
+        <a [routerLink]="['/view-post', post.id]">{{ post.name }}</a>
+      </h2>
+      <p>由 {{ post.postedBy }} 发布于 {{ post.date | date }}</p>
+      <p>{{ post.content | slice: 0 : 150 }}...</p>
+      <button mat-raised-button color="primary" (click)="likePost(post.id)">
+        {{ post.likeCount }} 点赞
+      </button>
+    </div>
+  </div>
+</div>

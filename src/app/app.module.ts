@@ -12,9 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewAllComponent } from './pages/view-all/view-all.component';
 import { ViewPostComponent } from './pages/view-post/view-post.component';
 import { SearchByNameComponent } from './pages/search-by-name/search-by-name.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, CreatePostComponent, ViewAllComponent, ViewPostComponent, SearchByNameComponent],
+  declarations: [AppComponent, CreatePostComponent, ViewAllComponent, ViewPostComponent, SearchByNameComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
